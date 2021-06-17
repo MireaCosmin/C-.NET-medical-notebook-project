@@ -1,0 +1,41 @@
+﻿@model Proiect_CarnetMedical.Models.Pacient
+@{
+    ViewBag.Title = "Adauga pacient";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Pacient", method: FormMethod.Post))
+{
+    @Html.Label("Nume", "Nume:")
+    <br />
+    @Html.TextBoxFor(b => b.Nume, null, new { placeholder = "Nume pacient", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.Nume, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Prenume", "Prenume:")
+    <br />
+    @Html.TextBoxFor(b => b.Prenume, null, new { placeholder = "Prenume pacient", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.Prenume, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("CNP", "CNP:")
+    <br />
+    @Html.TextBoxFor(b => b.CNP, null, new { placeholder = "Cod numeric personal", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.CNP, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.LabelFor(b => b.AlergeniList, "Selecteaza alergeni:")
+    <br />
+    for (int i = 0; i < Model.AlergeniList.Count(); i++)
+    {
+        @Html.HiddenFor(b => b.AlergeniList[i].Id)
+        @Html.HiddenFor(b => b.AlergeniList[i].Nume)
+        @Html.CheckBoxFor(b => b.AlergeniList[i].Bifat)
+        @Html.DisplayFor(b => b.AlergeniList[i].Nume)
+        <br />
+    }
+
+    <br />
+    <button class="btn btn-primary" type="submit">Adauga</button>
+}

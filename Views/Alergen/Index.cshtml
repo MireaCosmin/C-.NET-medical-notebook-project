@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Alergeni";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (ViewBag.Alergeni != null)
+{
+    foreach (var alergen in ViewBag.Alergeni)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @Html.Label("Nume", "Nume:")
+                <br />
+                <p>@alergen.Nume</p>
+                @using (Html.BeginForm(actionName: "Edit", controllerName: "Alergen", method: FormMethod.Get,
+routeValues: new { id = alergen.AlergenId }))
+                {
+                    <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Modifica</button>
+                }
+                @using (Html.BeginForm(actionName: "Delete", controllerName: "Alergen", method: FormMethod.Get,
+routeValues: new { id = alergen.AlergenId }))
+                {
+                    <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Sterge</button>
+                }
+            </div>
+        </div>
+    }
+}
+
+
+<br />
+@Html.ActionLink("Adauga alergen", "New")
+<br />
+

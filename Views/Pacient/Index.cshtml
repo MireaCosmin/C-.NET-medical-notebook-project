@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Pacienti";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@if (ViewBag.Pacienti != null)
+{
+    foreach (var pacient in ViewBag.Pacienti)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                @using (Html.BeginForm(actionName: "Details", controllerName: "Pacient", method: FormMethod.Get, routeValues: new { id = pacient.PacientID }))
+                {
+                    <button class="btn btn-link">@pacient.Nume</button>
+                }
+
+            </div>
+        </div>
+    }
+}
+
+@Html.ActionLink("Pacient nou", "New")

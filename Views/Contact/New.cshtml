@@ -1,0 +1,32 @@
+﻿@model Proiect_CarnetMedical.Models.Contact
+@{
+    ViewBag.Title = "Adauga date noi de contact";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Contact", method: FormMethod.Post))
+{
+    @Html.LabelFor(bt => bt.NrTelefon, "Numar de telefon:")
+    <br />
+    @Html.TextBoxFor(bt => bt.NrTelefon, null, new { placeholder = "Numar de telefon", @class = "form-control" })
+    @Html.ValidationMessageFor(bt => bt.NrTelefon, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.LabelFor(bt => bt.Email, "Adresa de email:")
+    <br />
+    @Html.TextBoxFor(bt => bt.Email, null, new { placeholder = "Adresa de email", @class = "form-control" })
+    @Html.ValidationMessageFor(bt => bt.Email, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    @Html.LabelFor(bt => bt.Adresa, "Adresa de resedinta:")
+    <br />
+    @Html.TextBoxFor(bt => bt.Adresa, null, new { placeholder = "Adresa de resedinta...", @class = "form-control" })
+    @Html.ValidationMessageFor(bt => bt.Adresa, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    <button class="btn btn-primary" type="submit">Adauga</button>
+}

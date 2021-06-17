@@ -1,0 +1,47 @@
+﻿@model Proiect_CarnetMedical.Models.Pacient
+@{
+    ViewBag.Title = "Modifica date pacient";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Pacient"))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+    @Html.HiddenFor(b => b.PacientID)
+    <br />
+    <br />
+
+    @Html.Label("Nume", "Nume:")
+    <br />
+    @Html.EditorFor(b => b.Nume, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(b => b.Nume, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Prenume", "Prenume:")
+    <br />
+    @Html.EditorFor(b => b.Prenume, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(b => b.Prenume, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("CNP", "CNP:")
+    <br />
+    @Html.EditorFor(b => b.CNP, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(b => b.CNP, "", new { @class = "text-danger" })
+    <br />
+
+
+    @Html.LabelFor(b => b.AlergeniList, "Choose genres:")
+    <br />
+    for (int i = 0; i < Model.AlergeniList.Count(); i++)
+    {
+        @Html.HiddenFor(b => b.AlergeniList[i].Id)
+        @Html.HiddenFor(b => b.AlergeniList[i].Nume)
+        @Html.CheckBoxFor(b => b.AlergeniList[i].Bifat)
+        @Html.DisplayFor(b => b.AlergeniList[i].Nume)
+        <br />
+    }
+    <br />
+    <button class="btn btn-primary" type="submit">Modifica</button>
+}

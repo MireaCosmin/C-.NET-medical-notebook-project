@@ -1,0 +1,77 @@
+﻿@model Proiect_CarnetMedical.Models.Pacient
+
+@{
+    ViewBag.Title = "Informatii";
+    var faraAlergeni = "Nu exista alergeni";
+}
+
+<div class="panel-body">
+    <h2>@ViewBag.Title</h2>
+
+    @Html.Label("Nume", "Nume:")
+    <br />
+    <p>@Model.Nume</p>
+
+    @Html.Label("Prenume", "Prenume:")
+    <br />
+    <p>@Model.Prenume</p>
+
+    @Html.Label("CNP", "CNP:")
+    <br />
+    <p>@Model.CNP</p>
+
+    @if (Model.Nationalitate != null)
+    {
+        @Html.Label("Nationalitate", "Nationalitate:")
+        <br />
+        @Html.DisplayFor(b => b.Nationalitate.Denumire)
+        <br />
+        <br />
+    }
+
+    @Html.Label("NrTelefon", "Numar Telefon:")
+    <br />
+    <p>@Model.Contact.NrTelefon</p>
+
+    @Html.Label("Email", "Adresa de email:")
+    <br />
+    <p>@Model.Contact.Email</p>
+
+    @Html.Label("Adresa", "Adresa de resedinta:")
+    <br />
+    <p>@Model.Contact.Adresa</p>
+
+    @Html.Label("Alergeni", "Alergeni:")
+    <br />
+
+    @if (Model.Alergeni.Count > 0)
+    {
+        <ul>
+            @foreach (var alergen in Model.Alergeni)
+            {
+                <li>@alergen.Nume</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <!--Modalitati de afisare a unui mesaj-->
+        <p>@faraAlergeni</p>
+    }
+</div>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Pacient", method: FormMethod.Get, routeValues: new { id = Model.PacientID }))
+{
+    <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Modifica date pacient</button>
+}
+<br />
+@using (Html.BeginForm(actionName: "Delete", controllerName: "Pacient", method: FormMethod.Post, routeValues: new { id = Model.PacientID }))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Sterge pacient</button>
+}
+<br />
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Contact", method: FormMethod.Get, routeValues: new { id = Model.PacientID }))
+{
+    <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">Modifica date de contact</button>
+}

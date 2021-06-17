@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Nationalitati";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+    <th>Denumire</th>
+    <th>Modifica/Sterge</th>
+    </thead>
+    <tbody>
+        @foreach (var nationalitate in ViewBag.Nationalitati)
+        {
+            <tr>
+                <td>@nationalitate.Denumire</td>
+                <td>
+                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Nationalitate", method: FormMethod.Get,
+                        routeValues: new { id = nationalitate.NationalitateId }))
+                    {
+                        <button type="submit" class="btn btn-link col-lg-3">Modifica</button>
+                    }
+
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Nationalitate", method: FormMethod.Post,
+                        routeValues: new { id = nationalitate.NationalitateId }))
+                    {
+                        @Html.HttpMethodOverride(HttpVerbs.Delete)
+                        <button type="submit" class="btn btn-link col-lg-3">Sterge</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+
+@Html.ActionLink("Adauga nationalitate", "New")

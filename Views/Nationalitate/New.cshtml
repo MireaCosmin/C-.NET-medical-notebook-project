@@ -1,0 +1,18 @@
+﻿@model Proiect_CarnetMedical.Models.Nationalitate
+@{
+    ViewBag.Title = "Adauga nationalitate";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Nationalitate", method: FormMethod.Post))
+{
+    @Html.LabelFor(bt => bt.Denumire, "Nationalitate:")
+    <br />
+    @Html.TextBoxFor(bt => bt.Denumire, null, new { placeholder = "Denumire nationalitate...", @class = "form-control" })
+    @Html.ValidationMessageFor(bt => bt.Denumire, "", new { @class = "text-danger" })
+    <br />
+    <br />
+
+    <button class="btn btn-primary" type="submit">Adauga</button>
+}
